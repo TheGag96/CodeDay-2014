@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 
 import java.util.ArrayList;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class MainGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	private OrthographicCamera camera;
