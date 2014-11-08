@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.physics.box2d.Box2D;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("level1.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, 1/16f);
+
+		//
 	}
 
 	@Override
@@ -48,7 +51,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		for (Sprite sprite : sprites) {
 			if (sprite instanceof Entity) {
-				((Entity)sprite).performLogic();
+				((Entity)sprite).performLogic(deltaTime);
 			}
 		}
 

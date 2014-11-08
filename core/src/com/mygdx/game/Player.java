@@ -7,7 +7,7 @@ public class Player extends Entity{
     }
 
     @Override
-    public void performLogic() {
+    public void performLogic(float deltaTime) {
 
     }
 }
