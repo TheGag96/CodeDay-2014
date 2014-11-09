@@ -12,7 +12,11 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2D;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -29,20 +33,21 @@ public class MainGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 90, 45);
+		camera.setToOrtho(false, 80, 45);
 		camera.update();
 
 		//Load tetures
-		img = new Texture("badlogic.jpg");
+		//img = new Texture("badlogic.jpg");
 
 		//Load Sounds
 
 		//Load level
 		mapLoader = new TmxMapLoader();
-		map = mapLoader.load("level1.tmx");
+		loadLevel(1);
 		mapRenderer = new OrthogonalTiledMapRenderer(map, 1/16f);
 
 		//
+		Gdx.gl20.glEnable(GL20.GL_BLEND);
 	}
 
 	@Override
@@ -67,11 +72,31 @@ public class MainGame extends ApplicationAdapter {
 		batch.begin();
 
 		for (Sprite sprite : sprites) {
-			sprite.draw(batch);
+			//sprite.draw(batch);
 		}
 
-		batch.draw(img, 0, 0);
-
 		batch.end();
+	}
+
+	public void loadLevel(int n) {
+		map = mapLoader.load("levels/level"+n+".tmx");
+		sprites.clear();
+		try {
+			Scanner scanner = new Scanner(Gdx.files.internal("levels/level"+n+".cfg").file());
+			while (scanner.hasNext()) {
+				String spriteName = scanner.next();
+				float x = scanner.nextFloat();
+				float y = scanner.nextFloat();
+				if (spriteName.equals("Player")) {
+					sprites.add(new Player(x, y));
+				}
+				else {
+					//TODO: add more here
+				}
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

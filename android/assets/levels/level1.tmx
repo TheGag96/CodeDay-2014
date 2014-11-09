@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="asdf" tilewidth="1" tileheight="1"/>
- <tileset firstgid="1" name="cool-tumbler-background" tilewidth="16" tileheight="16">
-  <image source="cool-tumbler-background.jpg" width="2560" height="1600"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16">
+  <image source="tileset.png" width="32" height="16"/>
  </tileset>
  <layer name="Tile Layer 1" width="80" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt2zERwDAQwLAPuSAt0HBoh5x7GkxAu/ea2frUM3oTP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx6/b7W/sDx2kcalb
+   eJztmNsSwyAIRI3//9F9zbSCiyxYEx6YZqZG4bhcJr21dpUtW7/Zbl9OtOLH4Xe1Ylj89jEcPZfZ2BU/P79iWPyK3zkmsSqGMVyfZF2w4odxi4z9ifxQrZUGZW5IjMXvl53GdLSmcliOQeNZ/GQmSEzsbyknM1ytbTXH+Gra2/lZeq32/ltroLefdmWfpzP0au97LYPhm/kx4v9XftIMzMjd0f67+EnfObwm6Y5V+0a/mQyZc4DlHM/cgu4ZzS8z52e8rPxm+o5mmM2OwW82s2Twy8rXUcwMfpr/aB1c/T+KG6O/oPeurbPwQ+6BoTlrj5X8kPTG5mLl54kP2dejydmdo/pDfVmdY6RamsUK9UljqcURyU47Z5QjGf3DMgPMaqK1HzL6rzePM9ihmtPqAKLfVXbeuFbPZvBe1QA7d625kMkN4eW9B4bvzNrA5sbyk6X72VpGvExus5kmkp81FsY8lzHjZGgPuUdmjJm9O0sPCEuvrrO43c9lrovgiVgmMwuX3f6dYBIfD7cPxIsPtA==
   </data>
  </layer>
 </map>

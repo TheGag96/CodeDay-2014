@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 public abstract class Entity extends Sprite {
     public int state;
     public int health;
-    public static int maxHealth;
+    public int maxHealth;
 
     public float velX;
     public float velY;
@@ -19,31 +21,64 @@ public abstract class Entity extends Sprite {
     private float newX;
     private float newY;
 
-    private float oldX;
-    private float oldY;
-
     public final static int TOP = 0;
     public final static int BOTTOM = 1;
     public final static int LEFT = 2;
     public final static int RIGHT = 3;
 
+    public static final float GRAVITY = -0.4f;
+
+    protected String texturePath;
+    protected int textureWidth;
+    protected int getTextureHeight;
+
     public Entity(float x, float y) {
         setPosition(x, y);
-        oldX = x;
-        oldY = y;
     }
 
     public abstract void performLogic(float deltaTime);
 
-    public void onBlockCollision(int direction, TiledMapTile tile) {
-        int tileID = tile.getId();
-        switch (tileID) {
+    public void translateX(float dist) {
+        newX += dist;
+    }
 
+    public void translateY(float dist) {
+        newY += dist;
+    }
+
+    public void onBlockCollision(int direction, Block block) {
+        int tileID = block.id;
+        switch (tileID) {
+            case Block.SOLID_ID:
+                switch (direction) {
+                    case BOTTOM:
+                        newY = block.y + 1;
+                        velY = 0;
+                        break;
+                    case TOP:
+                        newY = block.y - getHeight();
+                        velY = 0;
+                        break;
+                    case LEFT:
+                        newX = block.x + 1;
+                        velX = 0;
+                        break;
+                    case RIGHT:
+                        newX = block.x - getWidth();
+                        velX = 0;
+                        break;
+                }
+                break;
         }
     }
 
-    public void updatePosition(boolean xorY) {
-
+    public void updatePosition(boolean xorY, float deltaTime) {
+        if (xorY) {
+            newY = getY()+velY*deltaTime;
+        }
+        else {
+            newX = getX()+velX*deltaTime;
+        }
     }
 
     public void checkBlockCollisionsX(TiledMap map) {
@@ -51,7 +86,12 @@ public abstract class Entity extends Sprite {
 
         for (Block block : collisionBlocks) {
             if (block.overlaps(getBoundingRectangle())) {
-
+                if (newX > getX()) {
+                    onBlockCollision(RIGHT, block);
+                }
+                else {
+                    onBlockCollision(LEFT, block);
+                }
             }
         }
 
@@ -61,6 +101,16 @@ public abstract class Entity extends Sprite {
     public void checkBlockCollisionsY(TiledMap map) {
         ArrayList<Block> collisionBlocks = getCollisionTiles(map, true);
 
+        for (Block block : collisionBlocks) {
+            if (block.overlaps(getBoundingRectangle())) {
+                if (newY > getY()) {
+                    onBlockCollision(TOP, block);
+                }
+                else {
+                    onBlockCollision(BOTTOM, block);
+                }
+            }
+        }
 
         setY(newY);
     }
@@ -75,7 +125,7 @@ public abstract class Entity extends Sprite {
         int direction, initial, condition;
 
         if (xOrY) {
-            delta = getY()-oldY;
+            delta = newY-oldY;
             direction = velY < 0 ? -1 : 1;
             initial = -direction;
             condition = (int)Math.round(delta);
@@ -84,14 +134,15 @@ public abstract class Entity extends Sprite {
                 for (int i = -1; i <= Math.ceil(getWidth()); i++) {
                     TiledMapTileLayer.Cell cell = layer.getCell(i, j);
                     if (cell != null) {
-                        blocks.add(new Block(i, j, cell.getTile().getId()));
+                        int behaviorID = Integer.parseInt((String)cell.getTile().getProperties().get("behavior"));
+                        blocks.add(new Block(i, j, behaviorID));
                     }
                 }
             }
             return blocks;
         }
 
-        delta = getX()-oldX;
+        delta = newX-oldX;
         direction = velX < 0 ? -1 : 1;
         initial = -direction;
         condition = (int)Math.round(delta);
@@ -100,7 +151,9 @@ public abstract class Entity extends Sprite {
             for (int i = -1; i <= Math.ceil(getHeight()); i++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(i, j);
                 if (cell != null) {
-                    blocks.add(new Block(i, j, cell.getTile().getId()));
+                    int behaviorID = Integer.parseInt((String)cell.getTile().getProperties().get("behavior"));
+                    blocks.add(new Block(i, j, behaviorID));
+
                 }
             }
         }
