@@ -142,13 +142,16 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkEntityCollisionsX(ArrayList<Sprite> entities) {
+        Rectangle collisionBounds = newX > getX() ? new Rectangle(getX(),getY(),newX-getX()+getWidth(),getHeight())
+                : new Rectangle(newX,getY(),getX()-newX+getWidth(),getHeight());
+
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
 
                 if (entity.id == id) continue;
 
-                if (overlaps(entity.getBoundingRectangle())) {
+                if (collisionBounds.overlaps(entity.getBoundingRectangle())) {
                     if (newX > getX()) {
                         onEntityCollision(RIGHT, entity);
                         entity.onEntityColliding(LEFT, this);
@@ -163,13 +166,16 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkEntityCollisionsY(ArrayList<Sprite> entities) {
+        com.badlogic.gdx.math.Rectangle collisionBounds = newY > getY() ? new Rectangle(getX(),getY(),getWidth(),newY-getY()+getHeight())
+                : new Rectangle(getX(),newY,getWidth(),getY()-newY+getHeight());
+
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
 
                 if (entity.id == id)
 
-                if (overlaps(entity.getBoundingRectangle())) {
+                if (collisionBounds.overlaps(entity.getBoundingRectangle())) {
                     if (newY > getY()) {
                         onEntityCollision(TOP, entity);
                         entity.onEntityCollision(BOTTOM, this);

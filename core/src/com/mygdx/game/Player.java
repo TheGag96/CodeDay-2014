@@ -38,10 +38,13 @@ public class Player extends Entity{
             velX = 0;
         }
 
-        if (blockedDown || blockedUp) {
+        if (blockedDown) {
             jumping = false;
             jumpTimer = 0;
         }
+
+        if (blockedUp)
+            jumpTimer = JUMP_TIMER_MAX+1;
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
             if (!zWasPressed) {
@@ -51,9 +54,11 @@ public class Player extends Entity{
                 }
 
             }
-            jumpTimer += deltaTime;
-            if (jumpTimer < JUMP_TIMER_MAX) {
-                velY = JUMP_SPEED;
+            if (jumping) {
+                jumpTimer += deltaTime;
+                if (jumpTimer < JUMP_TIMER_MAX) {
+                    velY = JUMP_SPEED;
+                }
             }
         }
         else {

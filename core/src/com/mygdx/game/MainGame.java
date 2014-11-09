@@ -38,13 +38,15 @@ public class MainGame extends ApplicationAdapter {
 	public static boolean resultsScreen = false;
 	public static boolean win = false;
 
-	public int levelNum = 6;
+	public int levelNum = 1;
 
 	private Matrix4 normalProjection;
 
 	private float timeLimit;
 
 	public static int freeID = 0;
+
+	private static final int LAST_LEVEL = 8;
 
 	@Override
 	public void create () {
@@ -87,8 +89,14 @@ public class MainGame extends ApplicationAdapter {
 
 			batch.setProjectionMatrix(normalProjection);
 			if (win) {
-				font.draw(batch, "You made it!", 590, 400);
-				font.draw(batch, "Press Enter to continue.", 590, 100);
+				if (levelNum < LAST_LEVEL) {
+					font.draw(batch, "You made it!", 590, 400);
+					font.draw(batch, "Press Enter to continue.", 590, 100);
+				}
+				else {
+					font.draw(batch, "You beat the whole game!!", 590, 400);
+					font.draw(batch, "Press Enter to quit.", 590, 100);
+				}
 			}
 			else {
 				font.draw(batch, "You didn't make it...", 590, 400);
@@ -99,8 +107,10 @@ public class MainGame extends ApplicationAdapter {
 
 			if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 				resultsScreen = false;
-				if (win)
+				if (win) {
+					if (levelNum == LAST_LEVEL) Gdx.app.exit();
 					levelNum++;
+				}
 				loadLevel(levelNum);
 			}
 		}
