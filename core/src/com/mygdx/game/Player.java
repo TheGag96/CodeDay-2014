@@ -72,8 +72,10 @@ public class Player extends Entity{
             ((Button)e).pressed = true;
         }
         else if (e instanceof Door) {
-            if (((Door)e).open)
+            if (((Door)e).open) {
                 MainGame.resultsScreen = true;
+                MainGame.win = true;
+            }
         }
 
     }
