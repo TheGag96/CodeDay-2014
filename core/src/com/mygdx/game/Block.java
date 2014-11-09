@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.math.Rectangle;
 
 import java.awt.*;
 
@@ -19,8 +21,20 @@ public class Block extends com.badlogic.gdx.math.Rectangle {
     public Block(int x, int y, int id) {
         this.x = x;
         this.y = y;
+        width = 1;
+        height = 1;
         this.id = id;
     }
 
     public void onEntityCollision(Entity e) { }
+
+    @Override
+    public boolean overlaps(Rectangle r) {
+        if (x < r.x+r.width && x+width > r.x) {
+            if (y < r.y+r.height && y+height > r.y) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

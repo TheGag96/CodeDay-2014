@@ -16,9 +16,11 @@ public class PushButton extends Entity {
     public PushButton(float x, float y, int puzzleFlag, float activationLength) {
         super(x, y);
         setSize(1, 1);
+        setRegionWidth(16);
+        setRegionHeight(16);
         setTexture(normalTexture);
         this.puzzleFlag = puzzleFlag;
-        this.activationLength = activationLength*1000;
+        this.activationLength = activationLength;
     }
 
     @Override

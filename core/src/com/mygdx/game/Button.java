@@ -15,6 +15,8 @@ public class Button extends Entity {
         super(x, y);
         this.puzzleFlag = puzzleFlag;
         setSize(2, 1);
+        setRegionWidth(32);
+        setRegionHeight(16);
         setTexture(normalTexture);
     }
 

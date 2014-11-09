@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.*;
+import com.badlogic.gdx.math.Rectangle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,20 +45,13 @@ public abstract class Entity extends Sprite {
 
     public abstract void performLogic(float deltaTime);
 
-    public void translateX(float dist) {
-        newX += dist;
-    }
-
-    public void translateY(float dist) {
-        newY += dist;
-    }
-
     public void onBlockCollision(int direction, Block block) {
         int tileID = block.id;
         switch (tileID) {
             case Block.SOLID_ID:
                 switch (direction) {
                     case BOTTOM:
+                        System.out.println("bottom happening");
                         newY = block.y + 1;
                         velY = 0;
                         blockedDown = true;
@@ -67,11 +62,13 @@ public abstract class Entity extends Sprite {
                         blockedUp = true;
                         break;
                     case LEFT:
+                        System.out.println("left happening");
                         newX = block.x + 1;
                         velX = 0;
                         blockedLeft = true;
                         break;
                     case RIGHT:
+                        System.out.println("right happening");
                         newX = block.x - getWidth();
                         velX = 0;
                         blockedRight = true;
@@ -95,14 +92,19 @@ public abstract class Entity extends Sprite {
             blockedRight = false;
             newX = getX()+ velX * deltaTime;
         }
-        System.out.println("update Position is running" + newX + " " + getX() + " " + velX);
     }
 
     public void checkBlockCollisionsX(TiledMap map) {
+        if (newX == getX()) return;
+
+        Rectangle collisionBounds = newX > getX() ? new Rectangle(getX(),getY(),newX-getX()+getWidth(),getHeight())
+                : new Rectangle(newX,getY(),getX()-newX+getWidth(),getHeight());
+
         ArrayList<Block> collisionBlocks = getCollisionTiles(map, false);
 
+        float brandNewX = newX;
         for (Block block : collisionBlocks) {
-            if (block.overlaps(getBoundingRectangle())) {
+            if (block.overlaps(collisionBounds)) {
                 if (newX > getX()) {
                     onBlockCollision(RIGHT, block);
                 }
@@ -110,15 +112,22 @@ public abstract class Entity extends Sprite {
                     onBlockCollision(LEFT, block);
                 }
             }
+            if (brandNewX != newX)
+                break;
         }
 
     }
 
     public void checkBlockCollisionsY(TiledMap map) {
-        ArrayList<Block> collisionBlocks = getCollisionTiles(map, true);
+        if (newY == getY()) return;
 
+        com.badlogic.gdx.math.Rectangle collisionBounds = newY > getY() ? new Rectangle(getX(),getY(),getWidth(),newY-getY()+getHeight())
+                : new Rectangle(getX(),newY,getWidth(),getY()-newY+getHeight());
+
+        ArrayList<Block> collisionBlocks = getCollisionTiles(map, true);
+        float brandNewY = newY;
         for (Block block : collisionBlocks) {
-            if (block.overlaps(getBoundingRectangle())) {
+            if (block.overlaps(collisionBounds)) {
                 if (newY > getY()) {
                     onBlockCollision(TOP, block);
                 }
@@ -126,10 +135,14 @@ public abstract class Entity extends Sprite {
                     onBlockCollision(BOTTOM, block);
                 }
             }
+            if (brandNewY != newY)
+                break;
         }
     }
 
     public void checkEntityCollisionsX(ArrayList<Sprite> entities) {
+        if (newX == getX()) return;
+
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
@@ -148,6 +161,8 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkEntityCollisionsY(ArrayList<Sprite> entities) {
+        if (newY == getY()) return;
+
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
@@ -176,23 +191,27 @@ public abstract class Entity extends Sprite {
     private ArrayList<Block> getCollisionTiles(TiledMap map, boolean xOrY) {
         ArrayList<Block> blocks = new ArrayList<Block>();
         float oldX = getX(), oldY = getY();
+        int roundX = Math.round(oldX);
+        int roundY = Math.round(oldY);
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0);
 
         float delta;
-        int direction, initial, condition;
+        int direction, initial, condition, offset;
 
         if (xOrY) {
             delta = newY-oldY;
-            direction = velY < 0 ? -1 : 1;
+            direction = delta < 0 ? -1 : 1;
             initial = -direction;
+            offset = (newY<oldY) ? -1 : Math.round(getHeight());
             condition = (int)Math.round(delta);
 
             for (int j = initial; (direction == 1 && j <= condition) || (direction == -1 && j >= condition); j+=direction) {
                 for (int i = -1; i <= Math.ceil(getWidth()); i++) {
-                    TiledMapTileLayer.Cell cell = layer.getCell(i, j);
+                    TiledMapTileLayer.Cell cell = layer.getCell(roundX+i, roundY+offset+j);
                     if (cell != null) {
                         int behaviorID = Integer.parseInt((String)cell.getTile().getProperties().get("behavior"));
-                        blocks.add(new Block(i, j, behaviorID));
+                        if (behaviorID != 0)
+                            blocks.add(new Block(roundX+i, roundY+offset+j, behaviorID));
                     }
                 }
             }
@@ -200,16 +219,18 @@ public abstract class Entity extends Sprite {
         }
 
         delta = newX-oldX;
-        direction = velX < 0 ? -1 : 1;
+        direction = delta < 0 ? -1 : 1;
         initial = -direction;
+        offset = (newX<oldX) ? -1 : Math.round(getWidth());
         condition = (int)Math.round(delta);
 
         for (int j = initial; (direction == 1 && j <= condition) || (direction == -1 && j >= condition); j+=direction) {    //fixes high speed collision issues
             for (int i = -1; i <= Math.ceil(getHeight()); i++) {
-                TiledMapTileLayer.Cell cell = layer.getCell(i, j);
+                TiledMapTileLayer.Cell cell = layer.getCell(roundX+offset+j, roundY+i);
                 if (cell != null) {
                     int behaviorID = Integer.parseInt((String)cell.getTile().getProperties().get("behavior"));
-                    blocks.add(new Block(i, j, behaviorID));
+                    if (behaviorID != 0)
+                        blocks.add(new Block(roundX+offset+j, roundY+i, behaviorID));
 
                 }
             }

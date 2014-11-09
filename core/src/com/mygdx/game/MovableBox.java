@@ -12,6 +12,8 @@ public class MovableBox extends Entity {
         super(x, y);
         setTexture(normalTexture);
         setSize(2, 2);
+        setRegionWidth(32);
+        setRegionHeight(32);
         checksOtherEntities = true;
     }
 

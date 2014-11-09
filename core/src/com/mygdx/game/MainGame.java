@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class MainGame extends ApplicationAdapter {
-	SpriteBatch batch;
+	static SpriteBatch batch;
 	Texture img;
 	private OrthographicCamera camera;
 
@@ -49,7 +49,7 @@ public class MainGame extends ApplicationAdapter {
 		mapRenderer = new OrthogonalTiledMapRenderer(map, 1/16f);
 
 		//
-		Gdx.gl20.glEnable(GL20.GL_BLEND);
+		//Gdx.gl20.glEnable(GL20.GL_BLEND);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class MainGame extends ApplicationAdapter {
 
 		for (Sprite sprite : sprites) {
 			if (sprite instanceof Entity) {
-				((Entity)sprite).checkBlockCollisionsX(map);
+				((Entity)sprite).checkBlockCollisionsY(map);
 			}
 		}
 
@@ -128,8 +128,6 @@ public class MainGame extends ApplicationAdapter {
 		for (Sprite sprite : sprites) {
 			if (sprite instanceof Entity) {
 				((Entity)sprite).finalizePosition(true);
-				Entity ent = ((Entity)sprite);
-				ent.setPosition(ent.newX, ent.newY);
 			}
 		}
 	}

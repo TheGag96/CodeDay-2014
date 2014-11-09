@@ -14,6 +14,9 @@ public class Door extends Entity {
         super(x, y);
         this.puzzleFlag = puzzleFlag;
         setTexture(closedTexture);
+        setSize(2, 2);
+        setRegionWidth(32);
+        setRegionHeight(32);
     }
 
     @Override
