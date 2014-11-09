@@ -212,7 +212,12 @@ public abstract class Entity extends Sprite {
                 for (int i = -1; i <= Math.ceil(getWidth()); i++) {
                     TiledMapTileLayer.Cell cell = layer.getCell(roundX+i, roundY+offset+j);
                     if (cell != null) {
-                        int behaviorID = Integer.parseInt((String)cell.getTile().getProperties().get("behavior"));
+                        int behaviorID;
+                        try {
+                            behaviorID = Integer.parseInt((String) cell.getTile().getProperties().get("behavior"));
+                        } catch (NumberFormatException e) {
+                            behaviorID = 0;
+                        }
                         if (behaviorID != 0)
                             blocks.add(new Block(roundX+i, roundY+offset+j, behaviorID));
                     }
@@ -231,7 +236,12 @@ public abstract class Entity extends Sprite {
             for (int i = -1; i <= Math.ceil(getHeight()); i++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(roundX+offset+j, roundY+i);
                 if (cell != null) {
-                    int behaviorID = Integer.parseInt((String)cell.getTile().getProperties().get("behavior"));
+                    int behaviorID;
+                    try {
+                        behaviorID = Integer.parseInt((String) cell.getTile().getProperties().get("behavior"));
+                    } catch (NumberFormatException e) {
+                        behaviorID = 0;
+                    }
                     if (behaviorID != 0)
                         blocks.add(new Block(roundX+offset+j, roundY+i, behaviorID));
 

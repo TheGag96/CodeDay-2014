@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="cratesinfo" tilewidth="16" tileheight="16">
-  <image source="../../../../cratesinfo.png" width="320" height="160"/>
- </tileset>
- <tileset firstgid="201" name="concrete" tilewidth="16" tileheight="16">
-  <image source="../../../../concrete.png" width="64" height="64"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="concrete" tilewidth="16" tileheight="16">
+  <image source="concrete.png" width="64" height="64"/>
   <tile id="0">
    <properties>
     <property name="behavior" value="1"/>
@@ -15,10 +12,43 @@
     <property name="behavior" value="1"/>
    </properties>
   </tile>
+  <tile id="5">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="behavior" value=""/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="behavior" value="0"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="17" name="cratesinfo" tilewidth="16" tileheight="16">
+  <image source="cratesinfo.png" width="320" height="160"/>
  </tileset>
  <layer name="Tile Layer 1" width="80" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt2zdOBEEUBuG5BN67AO8XCPDeHX1hA4T2ONRKjEhAQvMHPStV8AWdvW6p9KLuVlX1pkbe8YFPNdJDvwVzDKv+9xuWnmNYDd7OfpsbvJ39Nme/GfvN2G/GfjP2m7HfjP1m7Ddjvxn7zdhvxn4z9pux34z9Zuw3Y78Z+83Yb8Z+M/absd+M/WbsN2O/GfvN2G/GfjN1vyMYxRjGMYFJTGEaM5jFHOaxgEUsYRkrLbhLCXW/q1jDOjawiS1sYwe72MM+DnCIDo5wjJMW3KWEut9TnOEcF7jEFa5xg1vc4R4PeMQTnvGC1xbcpQT3b8b9m3H/Zuw3U/fbrX7+g/R+OZees63sN2O/mf/26/nv8xccqZtr
+   eJzt27dOg0EQAOG/MaawEDnHghxtQ0HOqSDn9P6vwbiggQqDdLfSFF+/O7ort1QURYuaUkYr2tSURrtKBnNEVbGf/ewXlv3sZ7+47Gc/+8VlP/vZLy772c9+cdnPfvaLy372s19c9rOf/eKyn/3sF5f97Ge/uOz3f/060IkudKMHvehDPwYwiCEMYwSjGMM4JjLYJ2W/SUxhGjOYxRzmsYBFLGEZK6iihjpWsZbBPin7rWMDm9jCNnawiz3s4wCHOMIxTnCKM5xnsE/Kfhe4xBWucYNb3OEeD3jEE57xgle84R0fGeyTsp/sZ79YvvqVip93Ialni8D39/d+7RnMEVWj3fe/q9/dv30CW/fJ8Q==
   </data>
  </layer>
 </map>

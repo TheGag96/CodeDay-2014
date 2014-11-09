@@ -64,7 +64,7 @@ public class MainGame extends ApplicationAdapter {
 
 		//Load level
 		mapLoader = new TmxMapLoader();
-		loadLevel(1);
+		loadLevel(levelNum);
 		mapRenderer = new OrthogonalTiledMapRenderer(map, 1/16f);
 
 		//
@@ -122,7 +122,9 @@ public class MainGame extends ApplicationAdapter {
 				sprite.draw(batch);
 			}
 
-			timeLimit -= deltaTime;
+			if (timeLimit < 1000)
+				timeLimit -= deltaTime;
+
 			if (timeLimit < 0) {
 				resultsScreen = true;
 				win = false;
@@ -130,9 +132,10 @@ public class MainGame extends ApplicationAdapter {
 			}
 
 			batch.setProjectionMatrix(normalProjection);
-			font.draw(batch, "Level: "+levelNum, 10, 720-font.getCapHeight());
-			font.draw(batch, "Collectables: " + collectablesCollected, 1150, 720-font.getCapHeight());
-			font.draw(batch, "Time: " + timeLimit, 640, 720-font.getCapHeight());
+			font.draw(batch, "Level: "+levelNum, 10, 700-font.getCapHeight());
+			//font.draw(batch, "Collectables: " + collectablesCollected, 1150, 720-font.getCapHeight());
+			if (timeLimit < 1000)
+				font.draw(batch, "Time: " + timeLimit, 640, 700-font.getCapHeight());
 
 			batch.end();
 		}
@@ -195,7 +198,9 @@ public class MainGame extends ApplicationAdapter {
 	}
 
 	public void loadLevel(int n) {
+		if (map != null) map.dispose();
 		map = mapLoader.load("levels/level"+n+".tmx");
+		mapRenderer = new OrthogonalTiledMapRenderer(map, 1/16f);
 		sprites.clear();
 		puzzleFlags.clear();
 		collectablesCollected = 0;

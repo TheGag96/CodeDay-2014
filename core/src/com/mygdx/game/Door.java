@@ -23,7 +23,7 @@ public class Door extends Entity {
 
     @Override
     public void performLogic(float deltaTime) {
-        if (MainGame.puzzleFlags.get(puzzleFlag) || alwaysOpen) {
+        if (alwaysOpen || MainGame.puzzleFlags.get(puzzleFlag)) {
             open = true;
             setTexture(openTexture);
         }
