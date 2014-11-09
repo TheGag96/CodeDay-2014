@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="asdf" tilewidth="1" tileheight="1"/>
+ <tileset firstgid="1" name="cool-tumbler-background" tilewidth="16" tileheight="16">
+  <image source="cool-tumbler-background.jpg" width="2560" height="1600"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt2zERwDAQwLAPuSAt0HBoh5x7GkxAu/ea2frUM3oTP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx68bP378uvHjx6/b7W/sDx2kcalb
+  </data>
+ </layer>
+</map>
