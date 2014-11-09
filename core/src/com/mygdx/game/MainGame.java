@@ -70,7 +70,7 @@ public class MainGame extends ApplicationAdapter {
 		batch.begin();
 
 		for (Sprite sprite : sprites) {
-			//sprite.draw(batch);
+			sprite.draw(batch);
 		}
 
 		batch.end();
@@ -128,6 +128,8 @@ public class MainGame extends ApplicationAdapter {
 		for (Sprite sprite : sprites) {
 			if (sprite instanceof Entity) {
 				((Entity)sprite).finalizePosition(true);
+				Entity ent = ((Entity)sprite);
+				ent.setPosition(ent.newX, ent.newY);
 			}
 		}
 	}
@@ -169,7 +171,6 @@ public class MainGame extends ApplicationAdapter {
 					int puzzleFlag = scanner.nextInt();
 					sprites.add(new Wall(x, y, puzzleFlag));
 				}
-				scanner.nextLine();
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {

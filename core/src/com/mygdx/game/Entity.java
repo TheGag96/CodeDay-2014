@@ -88,13 +88,14 @@ public abstract class Entity extends Sprite {
         if (xorY) {
             blockedDown = false;
             blockedUp = false;
-            newY = getY()+velY*deltaTime;
+            newY = getY() + velY * deltaTime;
         }
         else {
             blockedLeft = false;
             blockedRight = false;
-            newX = getX()+velX*deltaTime;
+            newX = getX()+ velX * deltaTime;
         }
+        System.out.println("update Position is running" + newX + " " + getX() + " " + velX);
     }
 
     public void checkBlockCollisionsX(TiledMap map) {
@@ -175,7 +176,7 @@ public abstract class Entity extends Sprite {
     private ArrayList<Block> getCollisionTiles(TiledMap map, boolean xOrY) {
         ArrayList<Block> blocks = new ArrayList<Block>();
         float oldX = getX(), oldY = getY();
-        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(1);
+        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get(0);
 
         float delta;
         int direction, initial, condition;

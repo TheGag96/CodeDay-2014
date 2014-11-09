@@ -19,7 +19,7 @@ public class MovableBox extends Entity {
     public void performLogic(float deltaTime) {
 
 
-        velY -= GRAVITY;
+        velY += GRAVITY;
     }
 
     @Override

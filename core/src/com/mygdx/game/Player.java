@@ -51,7 +51,7 @@ public class Player extends Entity{
             }
         }
 
-        velY -= GRAVITY;
+        velY += GRAVITY;
     }
 
     @Override
