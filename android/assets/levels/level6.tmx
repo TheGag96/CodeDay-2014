@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="concrete" tilewidth="16" tileheight="16">
+  <image source="concrete.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="behavior" value=""/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="behavior" value="0"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt28EKgzAQRdF0oXYh0v//WiO0UMTUZEiYeeUu7sZSmZ4m6sYppTSTqSX3zG1k6rBbA8yh2ooffvjJhh9++OmGH3746YYffvjphh9++OmGH3746YYffvjphh9++OkW0e9RyHsuFb8aU+951PzOlt4z4Pe/fnfXP/zq7M7H8av3uzqOn83u+zPuvza/qEXxi7i2evmN3juKbi1+I9eJ5Vyl5xuP/8C6f3vN3HKOX25qfj0cW74bdY/3un+0/j7LuvO2Guk3qsh2H79XgDkU7ba33ZT83yNT7Xj/bQc9D7qw
+  </data>
+ </layer>
+</map>
