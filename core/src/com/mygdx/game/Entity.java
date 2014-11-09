@@ -18,8 +18,8 @@ public abstract class Entity extends Sprite {
     public float velX;
     public float velY;
 
-    private float newX;
-    private float newY;
+    protected float newX;
+    protected float newY;
 
     public final static int TOP = 0;
     public final static int BOTTOM = 1;
@@ -37,6 +37,7 @@ public abstract class Entity extends Sprite {
     public boolean blockedDown, blockedUp, blockedRight, blockedLeft;
 
     public Entity(float x, float y) {
+        super();
         setPosition(x, y);
     }
 
@@ -81,6 +82,7 @@ public abstract class Entity extends Sprite {
     }
 
     public void onEntityCollision(int direction, Entity e) { }
+    public void onEntityColliding(int direction, Entity e) { }
 
     public void updatePosition(boolean xorY, float deltaTime) {
         if (xorY) {
@@ -109,7 +111,6 @@ public abstract class Entity extends Sprite {
             }
         }
 
-        setX(newX);
     }
 
     public void checkBlockCollisionsY(TiledMap map) {
@@ -125,8 +126,6 @@ public abstract class Entity extends Sprite {
                 }
             }
         }
-
-        setY(newY);
     }
 
     public void checkEntityCollisionsX(ArrayList<Sprite> entities) {
@@ -136,11 +135,11 @@ public abstract class Entity extends Sprite {
                 if (getBoundingRectangle().overlaps(entity.getBoundingRectangle())) {
                     if (newX > getX()) {
                         onEntityCollision(RIGHT, entity);
-                        entity.onEntityCollision(LEFT, this);
+                        entity.onEntityColliding(LEFT, this);
                     }
                     else {
                         onEntityCollision(LEFT, entity);
-                        entity.onEntityCollision(RIGHT, this);
+                        entity.onEntityColliding(RIGHT, this);
                     }
                 }
             }
@@ -163,6 +162,13 @@ public abstract class Entity extends Sprite {
                 }
             }
         }
+    }
+
+    public void finalizePosition(boolean xOrY) {
+        if (xOrY)
+            setY(newY);
+        else
+            setX(newX);
     }
 
     //false for x, true for y

@@ -17,6 +17,7 @@ public class Player extends Entity{
         super(x, y);
         setTexture(new Texture(Gdx.files.internal("entities/player.png")));
         checksOtherEntities = true;
+        setSize(1, 2);
     }
 
     @Override
@@ -53,4 +54,13 @@ public class Player extends Entity{
         velY -= GRAVITY;
     }
 
+    @Override
+    public void onEntityCollision(int direction, Entity e) {
+        if (e instanceof Lever) {
+            if (Gdx.input.isKeyPressed(Input.Keys.X) && !Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+
+            }
+        }
+
+    }
 }

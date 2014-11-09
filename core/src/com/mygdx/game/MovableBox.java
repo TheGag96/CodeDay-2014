@@ -11,10 +11,33 @@ public class MovableBox extends Entity {
     public MovableBox(float x, float y) {
         super(x, y);
         setTexture(normalTexture);
+        setSize(2, 2);
+        checksOtherEntities = true;
     }
 
     @Override
     public void performLogic(float deltaTime) {
 
+
+        velY -= GRAVITY;
+    }
+
+    @Override
+    public void onEntityColliding(int direction, Entity e) {
+        if (e instanceof Player) {
+            if (direction == RIGHT) {
+                newX = e.newX - getWidth();
+            }
+            else {
+                newX = e.newX + e.getWidth();
+            }
+        }
+    }
+
+    @Override
+    public void onEntityCollision(int direction, Entity e) {
+        if (e instanceof Button) {
+            ((Button)e).pressed = true;
+        }
     }
 }

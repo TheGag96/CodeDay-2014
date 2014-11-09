@@ -56,11 +56,7 @@ public class MainGame extends ApplicationAdapter {
 	public void render () {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 
-		for (Sprite sprite : sprites) {
-			if (sprite instanceof Entity) {
-				((Entity)sprite).performLogic(deltaTime);
-			}
-		}
+		runLogicChecksAndCollisions(deltaTime);
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -78,6 +74,62 @@ public class MainGame extends ApplicationAdapter {
 		}
 
 		batch.end();
+	}
+
+	private void runLogicChecksAndCollisions(float deltaTime) {
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).performLogic(deltaTime);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).updatePosition(false, deltaTime);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).checkBlockCollisionsX(map);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).checkEntityCollisionsX(sprites);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).finalizePosition(false);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).updatePosition(true, deltaTime);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).checkBlockCollisionsX(map);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).checkEntityCollisionsY(sprites);
+			}
+		}
+
+		for (Sprite sprite : sprites) {
+			if (sprite instanceof Entity) {
+				((Entity)sprite).finalizePosition(true);
+			}
+		}
 	}
 
 	public void loadLevel(int n) {
@@ -103,6 +155,19 @@ public class MainGame extends ApplicationAdapter {
 				}
 				else if (spriteName.equals("MovableBox")) {
 					sprites.add(new MovableBox(x, y));
+				}
+				else if (spriteName.equals("Door")) {
+					int puzzleFlag = scanner.nextInt();
+					sprites.add(new Door(x, y, puzzleFlag));
+				}
+				else if (spriteName.equals("PushButton")) {
+					int puzzleFlag = scanner.nextInt();
+					float activationTime = scanner.nextFloat();
+					sprites.add(new PushButton(x, y, puzzleFlag, activationTime));
+				}
+				else if (spriteName.equals("Wall")) {
+					int puzzleFlag = scanner.nextInt();
+					sprites.add(new Wall(x, y, puzzleFlag));
 				}
 				scanner.nextLine();
 			}
