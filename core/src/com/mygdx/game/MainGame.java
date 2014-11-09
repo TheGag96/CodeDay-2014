@@ -2,19 +2,19 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.math.Matrix4;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -25,11 +25,21 @@ public class MainGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 
 	private OrthogonalTiledMapRenderer mapRenderer;
-	private TiledMap map;
+	public static TiledMap map;
 	private TmxMapLoader mapLoader;
+
+	private BitmapFont font;
+
 	public static HashMap<Integer, Boolean> puzzleFlags = new HashMap<Integer, Boolean>();
 
+	public static int collectablesCollected = 0;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+
+	public static boolean resultsScreen = false;
+
+	public int levelNum = 1;
+
+	private Matrix4 normalProjection;
 
 	@Override
 	public void create () {
@@ -38,8 +48,12 @@ public class MainGame extends ApplicationAdapter {
 		camera.setToOrtho(false, 80, 45);
 		camera.update();
 
-		//Load tetures
-		//img = new Texture("badlogic.jpg");
+		//Load font
+		font = new BitmapFont();
+		font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+		normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+
+
 
 		//Load Sounds
 
@@ -56,24 +70,52 @@ public class MainGame extends ApplicationAdapter {
 	public void render () {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 
-		runLogicChecksAndCollisions(deltaTime);
+		if (resultsScreen) {
+			Gdx.gl.glClearColor(0, 0.5f, 0.8f, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			batch.begin();
 
-		camera.update();
+			batch.setProjectionMatrix(camera.combined);
+			//TODO: star shit
 
-		mapRenderer.setView(camera);
-		mapRenderer.render();
 
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
+			batch.setProjectionMatrix(normalProjection);
+			font.draw(batch, "You made it!", 140, 400);
+			font.draw(batch, "Press Enter to continue.", 140, 100);
 
-		for (Sprite sprite : sprites) {
-			sprite.draw(batch);
+			batch.end();
+
+			if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+				resultsScreen = false;
+				levelNum++;
+				loadLevel(levelNum);
+			}
 		}
+		else {
+			runLogicChecksAndCollisions(deltaTime);
 
-		batch.end();
+			Gdx.gl.glClearColor(0, 0.5f, 0.8f, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+			camera.update();
+
+			mapRenderer.setView(camera);
+			mapRenderer.render();
+
+			batch.setProjectionMatrix(camera.combined);
+			batch.begin();
+
+			for (Sprite sprite : sprites) {
+				sprite.draw(batch);
+			}
+
+			batch.setProjectionMatrix(normalProjection);
+			font.draw(batch, "Level: "+levelNum, 10, 720-font.getCapHeight());
+			font.draw(batch, "Collectables: " + collectablesCollected, 1150, 720-font.getCapHeight());
+
+			batch.end();
+		}
 	}
 
 	private void runLogicChecksAndCollisions(float deltaTime) {
@@ -136,6 +178,7 @@ public class MainGame extends ApplicationAdapter {
 		map = mapLoader.load("levels/level"+n+".tmx");
 		sprites.clear();
 		puzzleFlags.clear();
+		collectablesCollected = 0;
 		try {
 			Scanner scanner = new Scanner(Gdx.files.internal("levels/level"+n+".cfg").file());
 			while (scanner.hasNext()) {

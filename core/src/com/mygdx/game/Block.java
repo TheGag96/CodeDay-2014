@@ -1,11 +1,6 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.math.Rectangle;
-
-import java.awt.*;
 
 public class Block extends com.badlogic.gdx.math.Rectangle {
     public final static int TOP = 0;
@@ -15,6 +10,8 @@ public class Block extends com.badlogic.gdx.math.Rectangle {
 
     public final static int PASSABLE_ID = 0;
     public final static int SOLID_ID = 1;
+    public final static int PLATFORM_ID = 2;
+    public final static int COLLECTABLE_ID = 3;
 
     public int id;
 
