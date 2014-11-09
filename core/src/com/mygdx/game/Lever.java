@@ -14,10 +14,10 @@ public class Lever extends Entity {
     public Lever(float x, float y, int puzzleFlag) {
         super(x, y);
         this.puzzleFlag = puzzleFlag;
-        setSize(2, 1);
-        setRegionWidth(32);
-        setRegionHeight(16);
+        setSize(1, 1);
         setTexture(normalTexture);
+        setRegionWidth(16);
+        setRegionHeight(16);
     }
 
     @Override

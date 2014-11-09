@@ -33,9 +33,13 @@ public abstract class Entity extends Sprite {
 
     public boolean blockedDown, blockedUp, blockedRight, blockedLeft;
 
+    private int id;
+
     public Entity(float x, float y) {
         super();
         setPosition(x, y);
+        id = MainGame.freeID;
+        MainGame.freeID++;
     }
 
     public abstract void performLogic(float deltaTime);
@@ -141,6 +145,9 @@ public abstract class Entity extends Sprite {
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
+
+                if (entity.id == id) continue;
+
                 if (overlaps(entity.getBoundingRectangle())) {
                     if (newX > getX()) {
                         onEntityCollision(RIGHT, entity);
@@ -159,6 +166,9 @@ public abstract class Entity extends Sprite {
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
+
+                if (entity.id == id)
+
                 if (overlaps(entity.getBoundingRectangle())) {
                     if (newY > getY()) {
                         onEntityCollision(TOP, entity);

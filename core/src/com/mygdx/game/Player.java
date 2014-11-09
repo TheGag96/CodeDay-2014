@@ -22,6 +22,7 @@ public class Player extends Entity{
         setSize(1, 2);
     }
 
+    boolean zWasPressed = false;
     @Override
     public void performLogic(float deltaTime) {
 
@@ -43,7 +44,8 @@ public class Player extends Entity{
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
-            if (!Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
+            if (!zWasPressed) {
+                zWasPressed = true;
                 if (blockedDown) {
                     jumping = true;
                 }
@@ -55,17 +57,26 @@ public class Player extends Entity{
             }
         }
         else {
+            zWasPressed = false;
             jumpTimer = JUMP_TIMER_MAX+1;
         }
 
         velY += GRAVITY;
     }
 
+    boolean xWasPressed = false;
     @Override
     public void onEntityCollision(int direction, Entity e) {
         if (e instanceof Lever) {
-            if (Gdx.input.isKeyPressed(Input.Keys.X) && !Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-                ((Lever)e).flipped = !((Lever)e).flipped;
+            if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+                if (!xWasPressed) {
+                    xWasPressed = true;
+                    ((Lever)e).flipped = !((Lever)e).flipped;
+                }
+
+            }
+            else {
+                xWasPressed = false;
             }
         }
         else if (e instanceof Button) {

@@ -9,10 +9,12 @@ public class Door extends Entity {
 
     public int puzzleFlag;
     public boolean open = false;
+    public boolean alwaysOpen = false;
 
     public Door(float x, float y, int puzzleFlag) {
         super(x, y);
         this.puzzleFlag = puzzleFlag;
+        if (puzzleFlag == -1) alwaysOpen = true;
         setTexture(closedTexture);
         setSize(2, 2);
         setRegionWidth(32);
@@ -21,7 +23,7 @@ public class Door extends Entity {
 
     @Override
     public void performLogic(float deltaTime) {
-        if (MainGame.puzzleFlags.get(puzzleFlag)) {
+        if (MainGame.puzzleFlags.get(puzzleFlag) || alwaysOpen) {
             open = true;
             setTexture(openTexture);
         }

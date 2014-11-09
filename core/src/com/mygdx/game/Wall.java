@@ -16,9 +16,9 @@ public class Wall extends Entity {
         super(x, y);
         this.puzzleFlag = puzzleFlag;
         setSize(1, 3);
+        setTexture(normalTexture);
         setRegionWidth(16);
         setRegionHeight(48);
-        setTexture(normalTexture);
     }
 
     @Override
