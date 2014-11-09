@@ -44,6 +44,8 @@ public class MainGame extends ApplicationAdapter {
 
 	private float timeLimit;
 
+	public static int freeID = 0;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -221,7 +223,8 @@ public class MainGame extends ApplicationAdapter {
 				}
 				else if (spriteName.equals("Door")) {
 					int puzzleFlag = scanner.nextInt();
-					puzzleFlags.put(puzzleFlag, false);
+					if (puzzleFlag != -1)
+						puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Door(x, y, puzzleFlag));
 				}
 				else if (spriteName.equals("PushButton")) {
