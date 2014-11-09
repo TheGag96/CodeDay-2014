@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="button" tilewidth="16" tileheight="16">
-  <image source="../../../../button.png" width="320" height="160"/>
+  <image source="button.png" width="320" height="160"/>
  </tileset>
  <tileset firstgid="201" name="straight arrow" tilewidth="16" tileheight="16">
-  <image source="../../../../straight arrow.png" width="320" height="160"/>
+  <image source="straight arrow.png" width="320" height="160"/>
  </tileset>
  <tileset firstgid="401" name="concrete" tilewidth="16" tileheight="16">
-  <image source="../../../../concrete.png" width="64" height="64"/>
+  <image source="concrete.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tile Layer 1" width="80" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt28dPFGEch/HxBgoqGsFCr6GXpROw0WsowtJhuSoo9S+hHAjhDwIr6tUO6FU6qM/ePExC9LfJ+07yO3ySndvMN/NkdifZxQuOs4RlLP71eUWPzz0OWsWa+i/B7dYtOA+vCm63YsF5eJX2K6P9ymi/MtqvjPYro/3KaL8y2q+M9iuj/cpovzLar4z2K6P9ymi/MtqvjPYro/3KaL8yoer3huM40YjBTdzCbdxBLOIQjwQkIgnJSEEq0pCODMf8Jv8iVP1mct1ZyEYOcpGHfBSgEEXwoRglKEUZylGBSlR5bL9Q9VvNddfgLu7hPh7gIWpRh3o0oBFNaEYLWtGGdnR4bL9Q9dvJdXehGz14hF70wY9+DGAQQxjGCEYxhnEEMOGx/fT5K2Py+bvBvbaJ53iBl3iF13iDLbzFO7y39L40+f35A5t8xCd8xhd8xTdsYwe7+I4flu5nst+fbLKHfRzgEEc4xglOcYZf+G3pfib7DUM4LuISIhCJy7iCq4jCNVy3YCs3JvuNRRzikYBEJCEZKUhFGtKRYcFWbkz2W4BCFMGHYpSgFGUoRwUqUWXBVm5M9luLOtSjAY1oQjNa0Io2tKPDgq3cmOzXj34MYBBDGMYIRjGGcQQwYcFWbkz2+xhPMIkpPMUzTGMGs5jDPBYs2MqNvr+S0ffPMvr7V0b7ldF+ZbRfGe1XJrid6f+Qef34DzPFiP8=
+   eJzt20dLwwAYh/F4cO+De2/cdS/ce+OebR2fSe1BxC/m3kf3Bp+CXgQJ5IWYlvfwo7Sn5A9Pkh7iCzGMbWx9f+7Ap9///P77913sKUv82+074DgClX87nwOOI1BpvzLar4z2K6P9ymi/MtqvjPYro/3KaL8y2q+M9iuj/cpovzLar4z2K6P9ymi/MtqvjPYro/3KWOk3yTCMZKQgFWlIRwYykYVs5CAXechHAQpRhGKUGP9//lJW+i3lvMtQjgpUogrVcKEGtahDPRrQiCY0owWtaAuC/az02855d6ATXehGD3rRh34MYBBDGMYIRjGGcUxgMgj2s9LvFOc9jRnMYg7zWMAilrCMFazCDQ+8WMM6NrAZBPvp/VdG778y+vwsY2e/B1zvDnGEY5zgFGc4xwUucYVr3ATA9dHOfm/Z4w73eMAjnvCMF7ziDe/4wGcA7Gdnv6EIQzgiEIkoRCMGsYhDPBKQ6IB9zNjZbxrSkYFMZCEbOchFHvJRgEIUOWAfM3b2W4kqVMOFGtSiDvVoQCOa0IwWB+xjxs5+u9GDXvShHwMYxBCGMYJRjGHcAfuYsbPfOcxjAYtYwjJWsAo3PPBiDesO2MeMPj/L6POzjP7/ldF+ZbRfGe1X5qdfff/N2vtv/u2+AEDVhng=
   </data>
  </layer>
 </map>

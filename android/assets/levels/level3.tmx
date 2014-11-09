@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="lever" tilewidth="16" tileheight="16">
-  <image source="../../../../lever.png" width="320" height="160"/>
+ <tileset firstgid="1" name="concrete" tilewidth="16" tileheight="16">
+  <image source="concrete.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="201" name="arrow" tilewidth="16" tileheight="16">
-  <image source="../../../../arrow.png" width="320" height="160"/>
+ <tileset firstgid="17" name="lever" tilewidth="16" tileheight="16">
+  <image source="lever.png" width="320" height="160"/>
  </tileset>
- <tileset firstgid="401" name="concrete" tilewidth="16" tileheight="16">
-  <image source="../../../../concrete.png" width="64" height="64"/>
+ <tileset firstgid="217" name="arrow" tilewidth="16" tileheight="16">
+  <image source="arrow.png" width="320" height="160"/>
  </tileset>
  <layer name="Tile Layer 1" width="80" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt29fPFGUUwOGh96b0XkU60hHpvQkoRQQFQUV6s2EHpSig3iBcEOK/I1VAEUSpoqIIUqSjPHth8t3CSb7dTd5kn4tJZpM5J/PLZDbZbWWy7Cu2s4Nt6fiBjnN2JQ8lt7udBXAdxSq3u68L4DqKVW53qd+Hl/qNSf3GpH5jUr8xqd+Y1G9M6jcm9RuT+o1J/cakfmNSvzGp35jUb0zqNyb1G5P6jUn9xqR+Y4qx32+yLNvNHvayj/0c4FsOcojDfMf3HOEHjnKMHznOT1nsWqL95mOWn513gpOc4jRnOMsvnONXfuN3zvMHf3KBv7jIJf4O7i/abz5muey8K1zlGv9wnRvc5Ba3ucNd7vEv/5H5fhnKUo7ywRai/eZjlgpUpBKVqUJVqlGdGtSkFrWpwyM8Sl3qUZ8GNAzuL9pvPmZpRGOa0JRmNKcFLWlFa9rQlnY8RnsepwMd6UTn4P6i/eZjli50pRvdeYIe9KQXvelDX/rRnycZwFMMZBCDGRLcX8l+fbKylKM8FahIJSpThapUozo1qEktalMnK51ZhjKM4YxgJKMYzRjGMo7xTGAiTzOJyUzhGZ5lanB/JfutZ/76NKAhjWhME5rSjOa0oCWtaE0b2tIuK51ZpjGdGTzHTJ5nFrN5gReZw1xeYh7zeZlXeJUFvBbcX8l+O5i/I53oTBe60o3uuXuLHvSkF73pQ1/60T8rnVkWsojFLGEpy1jOClayitW8zhu8yVu8zRre4V3eC+6vZL8DzT+IwQxhKMMYzojcvcUoRjOGsYxjPBOYmJXOLO/zAR/yEWtZx8d8wno2sJFNfMpnbGYLW/mcL/gyuL/o87eQZsmH9P4bU4zvv4Uk/X4Vk/qNSf3GpH5jUr8xqd+Y1G/M//0W0v/Jiuk4t7v7gKhYgg==
+   eJzt21VvFGEUgOEtsG2BAjXqClSoK1Chrri7u7tbcXd3+Fu4u7vLO0lJCAmZSQ87u0vOxZPs3J3vO/PeTLJOh8PhCz84f/vtr8+mz790VC0S0Mzdc3irwGbunsNbab8y2q+M9iuj/cpovzLar4z2K6P9ymi/MtqvjPYro/3KaL8y2q+M9iuj/cpovzLar4z2K6P9ymi/Mq7q9xIu4wqu4hqu4wZu4hZu4w7u4h7u4wEe4hEe4wmeesA9/Y2r+n2G53iBl3iF13iDt3iH9/iAj/iEz/iCr/iG7/gBh4/n7spV/fpw5lZojTZwwhd+8EdbtEN7BKCDcUfohEAEIRghCDW5Pzt39SdX9duZOcIQjghEIgrRiEEs4hCPBCSiC7qiG5KQjBSkmpzJzl3Z1W935khDOjKQiSxkIwe5yEM+ClCIHuiJXihCMUpQanImO3dlV7+9maMM5ahAJapQjRrUog71aEAj+qAv+qE/BmAgBpmcyc5dWek3CMEIQaixX4QhHBGIRBSiEYNYxCEeCUjEYOYYgqEYhuEYgZEYhdEYg7EYh/GYgImYhMmYgqmYZnImO3dlpd8kJCMFqcZ+kYZ0ZCATWchGDnKRh3wUoBDTmWMGZmIWZmMO5mIe5mMBFmIRFmMJlmIZlmMFVmKVyZns3JWVfotQjBKUGvtFGcpRgUpUoRo1qEUd6tGARqxmjjVYi3VYjw1owkZswmZswVZsw3bswE7swm7swV6TM9m5Kyv9/gv7mGM/DuAgDuEwjuAojuE4TuAkTuE0zuAszuE8LuCiyZns3JWVfr2Nnbuy0q+yTr9fyfwP/bqT9iuj/cpovzLar4zRrr5/LWfcnfH+edJ/yrzp2bi7n3CKXb4=
   </data>
  </layer>
 </map>
