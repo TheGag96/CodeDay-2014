@@ -46,7 +46,7 @@ public class MainGame extends ApplicationAdapter {
 
 	public static int freeID = 0;
 
-	private static final int LAST_LEVEL = 8;
+	private static final int LAST_LEVEL = 9;
 
 	@Override
 	public void create () {
