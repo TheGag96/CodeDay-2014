@@ -76,6 +76,15 @@ public abstract class Entity extends Sprite {
                 layer.setCell((int)block.x, (int)block.y, null);
                 MainGame.collectablesCollected++;
                 break;
+            case Block.PLATFORM_ID:
+                if (direction == BOTTOM) {
+                    if (newY < getY()) {
+                        newY = block.y + 1;
+                        velY = 0;
+                        blockedDown = true;
+                    }
+                }
+                break;
         }
     }
 

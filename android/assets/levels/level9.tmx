@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="80" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="cratesinfo" tilewidth="16" tileheight="16">
+  <image source="cratesinfo.png" width="320" height="160"/>
+ </tileset>
+ <tileset firstgid="201" name="concrete" tilewidth="16" tileheight="16">
+  <image source="concrete.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="behavior" value="2"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="behavior" value="behavior"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="behavior" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt2zkKgDAURdHsf2cKDkUQl6MpbAQVHJL34i1uK/HEn0JIF0Lo6VbD2rg20a2SXRRYh2sRP/zwsw0//PDzDT/88PMNP/zw8w0//PDzDb/8fu2u0u/g5kf4qfnlnOnmJFc/hfDDD7/3+upM3D93qzY/Vf+/+DmEn4/f0bmlPJ9KfjWGH341+dVwppX0+2IPlPdB0c8pNz+175L/9/n9CL9cfszpMz+69psF1uFasutC+XtkrqX7bwv2Jrlz
+  </data>
+ </layer>
+</map>

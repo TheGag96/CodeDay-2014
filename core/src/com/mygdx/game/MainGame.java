@@ -35,7 +35,7 @@ public class MainGame extends ApplicationAdapter {
 	public static int collectablesCollected = 0;
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
-	public static boolean resultsScreen = false;
+	public static boolean resultsScreen = true;
 	public static boolean win = false;
 
 	public int levelNum = 1;
@@ -59,8 +59,6 @@ public class MainGame extends ApplicationAdapter {
 		font = new BitmapFont();
 		font.setColor(1.0f, 1.0f, 1.0f, 1.0f);
 		normalProjection = new Matrix4().setToOrtho2D(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
-
-
 
 		//Load Sounds
 
@@ -99,8 +97,14 @@ public class MainGame extends ApplicationAdapter {
 				}
 			}
 			else {
-				font.draw(batch, "You didn't make it...", 590, 400);
-				font.draw(batch, "Press Enter to retry.", 590, 100);
+				if (levelNum == 1) {
+					font.draw(batch, "\"Get to the Bathroom!\" v1.0", 590, 400);
+					font.draw(batch, "Press Enter to begin.", 590, 100);
+				}
+				else {
+					font.draw(batch, "You didn't make it...", 590, 400);
+					font.draw(batch, "Press Enter to retry.", 590, 100);
+				}
 			}
 
 			batch.end();
@@ -142,7 +146,7 @@ public class MainGame extends ApplicationAdapter {
 			}
 
 			batch.setProjectionMatrix(normalProjection);
-			font.draw(batch, "Level: "+levelNum, 10, 700-font.getCapHeight());
+			font.draw(batch, "Level: "+levelNum, 20, 700-font.getCapHeight());
 			//font.draw(batch, "Collectables: " + collectablesCollected, 1150, 720-font.getCapHeight());
 			if (timeLimit < 1000)
 				font.draw(batch, "Time: " + timeLimit, 640, 700-font.getCapHeight());
