@@ -54,6 +54,9 @@ public class Player extends Entity{
                 velY = JUMP_SPEED;
             }
         }
+        else {
+            jumpTimer = JUMP_TIMER_MAX+1;
+        }
 
         velY += GRAVITY;
     }
@@ -62,7 +65,7 @@ public class Player extends Entity{
     public void onEntityCollision(int direction, Entity e) {
         if (e instanceof Lever) {
             if (Gdx.input.isKeyPressed(Input.Keys.X) && !Gdx.input.isKeyJustPressed(Input.Keys.X)) {
-
+                ((Lever)e).flipped = !((Lever)e).flipped;
             }
         }
 
