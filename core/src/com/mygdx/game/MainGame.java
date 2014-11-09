@@ -77,12 +77,12 @@ public class MainGame extends ApplicationAdapter {
 			batch.begin();
 
 			batch.setProjectionMatrix(camera.combined);
-			//TODO: star shit
+			//TODO: star stuff
 
 
 			batch.setProjectionMatrix(normalProjection);
-			font.draw(batch, "You made it!", 140, 400);
-			font.draw(batch, "Press Enter to continue.", 140, 100);
+			font.draw(batch, "You made it!", 590, 400);
+			font.draw(batch, "Press Enter to continue.", 590, 100);
 
 			batch.end();
 
@@ -194,6 +194,7 @@ public class MainGame extends ApplicationAdapter {
 				}
 				else if (spriteName.equals("Lever")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Lever(x, y , puzzleFlag));
 				}
 				else if (spriteName.equals("MovableBox")) {
@@ -201,15 +202,18 @@ public class MainGame extends ApplicationAdapter {
 				}
 				else if (spriteName.equals("Door")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Door(x, y, puzzleFlag));
 				}
 				else if (spriteName.equals("PushButton")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					float activationTime = scanner.nextFloat();
 					sprites.add(new PushButton(x, y, puzzleFlag, activationTime));
 				}
 				else if (spriteName.equals("Wall")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Wall(x, y, puzzleFlag));
 				}
 			}

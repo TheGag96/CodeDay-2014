@@ -9,7 +9,9 @@ public class Button extends Entity {
     private static final Texture normalTexture = new Texture(Gdx.files.internal("entities/button_normal.png"));
     private static final Texture pressedTexture = new Texture(Gdx.files.internal("entities/button_pressed.png"));
 
+    public boolean activated = false;
     public boolean pressed = false;
+
     public float timer = 0;
     public float turnoffDelay = 1;
 
@@ -17,25 +19,28 @@ public class Button extends Entity {
         super(x, y);
         this.puzzleFlag = puzzleFlag;
         setSize(2, 1);
+        setTexture(normalTexture);
         setRegionWidth(32);
         setRegionHeight(16);
-        setTexture(normalTexture);
     }
 
     @Override
     public void performLogic(float deltaTime) {
         if (pressed) {
-            setTexture(pressedTexture);
+            activated = true;
             timer = 0;
+            setTexture(pressedTexture);
         }
         else {
-            timer += deltaTime;
-            if (timer > turnoffDelay) {
-                pressed = false;
+            if (activated) {
+                timer += deltaTime;
+                if (timer > turnoffDelay) {
+                    activated = false;
+                    setTexture(normalTexture);
+                }
             }
-            setTexture(normalTexture);
         }
-        MainGame.puzzleFlags.put(puzzleFlag, pressed);
+        MainGame.puzzleFlags.put(puzzleFlag, activated);
 
         pressed = false;
     }

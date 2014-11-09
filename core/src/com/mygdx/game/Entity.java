@@ -23,7 +23,7 @@ public abstract class Entity extends Sprite {
     public final static int LEFT = 2;
     public final static int RIGHT = 3;
 
-    public static final float GRAVITY = -0.4f;
+    public static final float GRAVITY = -0.8f;
 
     protected String texturePath;
     protected int textureWidth;
@@ -138,12 +138,10 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkEntityCollisionsX(ArrayList<Sprite> entities) {
-        if (newX == getX()) return;
-
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
-                if (getBoundingRectangle().overlaps(entity.getBoundingRectangle())) {
+                if (overlaps(entity.getBoundingRectangle())) {
                     if (newX > getX()) {
                         onEntityCollision(RIGHT, entity);
                         entity.onEntityColliding(LEFT, this);
@@ -158,12 +156,10 @@ public abstract class Entity extends Sprite {
     }
 
     public void checkEntityCollisionsY(ArrayList<Sprite> entities) {
-        if (newY == getY()) return;
-
         for (Sprite s : entities) {
             if (s instanceof Entity) {
                 Entity entity = (Entity)s;
-                if (getBoundingRectangle().overlaps(entity.getBoundingRectangle())) {
+                if (overlaps(entity.getBoundingRectangle())) {
                     if (newY > getY()) {
                         onEntityCollision(TOP, entity);
                         entity.onEntityCollision(BOTTOM, this);
@@ -233,5 +229,14 @@ public abstract class Entity extends Sprite {
             }
         }
         return blocks;
+    }
+
+    public boolean overlaps(Rectangle r) {
+        if (getX() < r.x+r.width && getX()+getWidth() > r.x) {
+            if (getY() < r.y+r.height && getY()+getHeight() > r.y) {
+                return true;
+            }
+        }
+        return false;
     }
 }
