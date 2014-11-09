@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="cratesinfo" tilewidth="16" tileheight="16">
+  <image source="../../../../cratesinfo.png" width="320" height="160"/>
+ </tileset>
+ <tileset firstgid="201" name="concrete" tilewidth="16" tileheight="16">
+  <image source="../../../../concrete.png" width="64" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="80" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt27dOA0EURuF9CaLJmIKcDRTknB7d4AIhHoezxUo0yIi/2LF0ik/a290Z6Wiq7VdV9YZ39H98D5yHzrUPfOpf6rv7KmCPUVXf3aCAPUaV/WbsN2O/GfvN2G/GfjP2m7HfjP1m7Ddjvxn7zdhvxn4z9pux34z9Zuw3Y78Z+83Yb8Z+M/absd+M/WbsN2O/GfvN2G/GfjNNv2MYxwQmMYVpdDCDWcxhHgtYxBKW0cVKAWdpQ9PvKtawjg1sYgvb2MEu9rCPAxyihyMc46SAs7Sh6fcUZzjHBS5xhWvc4BZ3uMcDHvGEZ7zgtYCztMH3N+P7m/H9zdhvpul32H8ibe9ZKvvN2G/mr/06/z5/A6N0m5c=
+  </data>
+ </layer>
+</map>
