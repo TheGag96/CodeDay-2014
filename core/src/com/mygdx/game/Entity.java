@@ -32,6 +32,10 @@ public abstract class Entity extends Sprite {
     protected int textureWidth;
     protected int getTextureHeight;
 
+    public boolean checksOtherEntities = false;
+
+    public boolean blockedDown, blockedUp, blockedRight, blockedLeft;
+
     public Entity(float x, float y) {
         setPosition(x, y);
     }
@@ -54,29 +58,39 @@ public abstract class Entity extends Sprite {
                     case BOTTOM:
                         newY = block.y + 1;
                         velY = 0;
+                        blockedDown = true;
                         break;
                     case TOP:
                         newY = block.y - getHeight();
                         velY = 0;
+                        blockedUp = true;
                         break;
                     case LEFT:
                         newX = block.x + 1;
                         velX = 0;
+                        blockedLeft = true;
                         break;
                     case RIGHT:
                         newX = block.x - getWidth();
                         velX = 0;
+                        blockedRight = true;
                         break;
                 }
                 break;
         }
     }
 
+    public void onEntityCollision(int direction, Entity e) { }
+
     public void updatePosition(boolean xorY, float deltaTime) {
         if (xorY) {
+            blockedDown = false;
+            blockedUp = false;
             newY = getY()+velY*deltaTime;
         }
         else {
+            blockedLeft = false;
+            blockedRight = false;
             newX = getX()+velX*deltaTime;
         }
     }
@@ -113,6 +127,42 @@ public abstract class Entity extends Sprite {
         }
 
         setY(newY);
+    }
+
+    public void checkEntityCollisionsX(ArrayList<Sprite> entities) {
+        for (Sprite s : entities) {
+            if (s instanceof Entity) {
+                Entity entity = (Entity)s;
+                if (getBoundingRectangle().overlaps(entity.getBoundingRectangle())) {
+                    if (newX > getX()) {
+                        onEntityCollision(RIGHT, entity);
+                        entity.onEntityCollision(LEFT, this);
+                    }
+                    else {
+                        onEntityCollision(LEFT, entity);
+                        entity.onEntityCollision(RIGHT, this);
+                    }
+                }
+            }
+        }
+    }
+
+    public void checkEntityCollisionsY(ArrayList<Sprite> entities) {
+        for (Sprite s : entities) {
+            if (s instanceof Entity) {
+                Entity entity = (Entity)s;
+                if (getBoundingRectangle().overlaps(entity.getBoundingRectangle())) {
+                    if (newY > getY()) {
+                        onEntityCollision(TOP, entity);
+                        entity.onEntityCollision(BOTTOM, this);
+                    }
+                    else {
+                        onEntityCollision(BOTTOM, entity);
+                        entity.onEntityCollision(TOP, this);
+                    }
+                }
+            }
+        }
     }
 
     //false for x, true for y

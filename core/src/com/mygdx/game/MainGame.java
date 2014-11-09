@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class MainGame extends ApplicationAdapter {
@@ -26,6 +27,7 @@ public class MainGame extends ApplicationAdapter {
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
 	private TmxMapLoader mapLoader;
+	public static HashMap<Integer, Boolean> puzzleFlags = new HashMap<Integer, Boolean>();
 
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
@@ -81,6 +83,7 @@ public class MainGame extends ApplicationAdapter {
 	public void loadLevel(int n) {
 		map = mapLoader.load("levels/level"+n+".tmx");
 		sprites.clear();
+		puzzleFlags.clear();
 		try {
 			Scanner scanner = new Scanner(Gdx.files.internal("levels/level"+n+".cfg").file());
 			while (scanner.hasNext()) {
@@ -90,9 +93,18 @@ public class MainGame extends ApplicationAdapter {
 				if (spriteName.equals("Player")) {
 					sprites.add(new Player(x, y));
 				}
-				else {
-					//TODO: add more here
+				else if (spriteName.equals("Button")) {
+					int puzzleFlag = scanner.nextInt();
+					sprites.add(new Button(x, y , puzzleFlag));
 				}
+				else if (spriteName.equals("Lever")) {
+					int puzzleFlag = scanner.nextInt();
+					sprites.add(new Lever(x, y , puzzleFlag));
+				}
+				else if (spriteName.equals("MovableBox")) {
+					sprites.add(new MovableBox(x, y));
+				}
+				scanner.nextLine();
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
