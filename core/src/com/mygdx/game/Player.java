@@ -5,11 +5,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Player extends Entity{
-    private static final float SPEED = 8;
-    private static final float JUMP_SPEED = 10;
+    private static final float SPEED = 16;
+    private static final float JUMP_SPEED = 15;
 
     public float jumpTimer = 0;
-    public static final float JUMP_TIMER_MAX = 30/60f;
+    public static final float JUMP_TIMER_MAX = 15/60f;
 
     public boolean jumping = false;
 
@@ -37,7 +37,7 @@ public class Player extends Entity{
             velX = 0;
         }
 
-        if (blockedDown) {
+        if (blockedDown || blockedUp) {
             jumping = false;
             jumpTimer = 0;
         }
@@ -72,8 +72,10 @@ public class Player extends Entity{
             ((Button)e).pressed = true;
         }
         else if (e instanceof Door) {
-            if (((Door)e).open)
+            if (((Door)e).open) {
                 MainGame.resultsScreen = true;
+                MainGame.win = true;
+            }
         }
 
     }

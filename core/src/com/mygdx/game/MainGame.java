@@ -36,10 +36,13 @@ public class MainGame extends ApplicationAdapter {
 	ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 
 	public static boolean resultsScreen = false;
+	public static boolean win = false;
 
 	public int levelNum = 1;
 
 	private Matrix4 normalProjection;
+
+	private float timeLimit;
 
 	@Override
 	public void create () {
@@ -77,18 +80,25 @@ public class MainGame extends ApplicationAdapter {
 			batch.begin();
 
 			batch.setProjectionMatrix(camera.combined);
-			//TODO: star shit
+			//TODO: star stuff
 
 
 			batch.setProjectionMatrix(normalProjection);
-			font.draw(batch, "You made it!", 140, 400);
-			font.draw(batch, "Press Enter to continue.", 140, 100);
+			if (win) {
+				font.draw(batch, "You made it!", 590, 400);
+				font.draw(batch, "Press Enter to continue.", 590, 100);
+			}
+			else {
+				font.draw(batch, "You didn't make it...", 590, 400);
+				font.draw(batch, "Press Enter to retry.", 590, 100);
+			}
 
 			batch.end();
 
 			if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 				resultsScreen = false;
-				levelNum++;
+				if (win)
+					levelNum++;
 				loadLevel(levelNum);
 			}
 		}
@@ -110,9 +120,17 @@ public class MainGame extends ApplicationAdapter {
 				sprite.draw(batch);
 			}
 
+			timeLimit -= deltaTime;
+			if (timeLimit < 0) {
+				resultsScreen = true;
+				win = false;
+				timeLimit = 0;
+			}
+
 			batch.setProjectionMatrix(normalProjection);
 			font.draw(batch, "Level: "+levelNum, 10, 720-font.getCapHeight());
 			font.draw(batch, "Collectables: " + collectablesCollected, 1150, 720-font.getCapHeight());
+			font.draw(batch, "Time: " + timeLimit, 640, 720-font.getCapHeight());
 
 			batch.end();
 		}
@@ -181,6 +199,7 @@ public class MainGame extends ApplicationAdapter {
 		collectablesCollected = 0;
 		try {
 			Scanner scanner = new Scanner(Gdx.files.internal("levels/level"+n+".cfg").file());
+			timeLimit = scanner.nextFloat();
 			while (scanner.hasNext()) {
 				String spriteName = scanner.next();
 				float x = scanner.nextFloat();
@@ -194,6 +213,7 @@ public class MainGame extends ApplicationAdapter {
 				}
 				else if (spriteName.equals("Lever")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Lever(x, y , puzzleFlag));
 				}
 				else if (spriteName.equals("MovableBox")) {
@@ -201,15 +221,18 @@ public class MainGame extends ApplicationAdapter {
 				}
 				else if (spriteName.equals("Door")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Door(x, y, puzzleFlag));
 				}
 				else if (spriteName.equals("PushButton")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					float activationTime = scanner.nextFloat();
 					sprites.add(new PushButton(x, y, puzzleFlag, activationTime));
 				}
 				else if (spriteName.equals("Wall")) {
 					int puzzleFlag = scanner.nextInt();
+					puzzleFlags.put(puzzleFlag, false);
 					sprites.add(new Wall(x, y, puzzleFlag));
 				}
 			}
