@@ -68,6 +68,13 @@ public class Player extends Entity{
                 ((Lever)e).flipped = !((Lever)e).flipped;
             }
         }
+        else if (e instanceof Button) {
+            ((Button)e).pressed = true;
+        }
+        else if (e instanceof Door) {
+            if (((Door)e).open)
+                MainGame.resultsScreen = true;
+        }
 
     }
 }

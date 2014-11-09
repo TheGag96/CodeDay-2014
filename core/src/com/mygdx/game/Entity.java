@@ -1,15 +1,10 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.math.Rectangle;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Entity extends Sprite {
@@ -51,7 +46,6 @@ public abstract class Entity extends Sprite {
             case Block.SOLID_ID:
                 switch (direction) {
                     case BOTTOM:
-                        System.out.println("bottom happening");
                         newY = block.y + 1;
                         velY = 0;
                         blockedDown = true;
@@ -62,18 +56,21 @@ public abstract class Entity extends Sprite {
                         blockedUp = true;
                         break;
                     case LEFT:
-                        System.out.println("left happening");
                         newX = block.x + 1;
                         velX = 0;
                         blockedLeft = true;
                         break;
                     case RIGHT:
-                        System.out.println("right happening");
                         newX = block.x - getWidth();
                         velX = 0;
                         blockedRight = true;
                         break;
                 }
+                break;
+            case Block.COLLECTABLE_ID:
+                TiledMapTileLayer layer = (TiledMapTileLayer)MainGame.map.getLayers().get(0);
+                layer.setCell((int)block.x, (int)block.y, null);
+                MainGame.collectablesCollected++;
                 break;
         }
     }

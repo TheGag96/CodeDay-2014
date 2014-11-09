@@ -10,6 +10,8 @@ public class Button extends Entity {
     private static final Texture pressedTexture = new Texture(Gdx.files.internal("entities/button_pressed.png"));
 
     public boolean pressed = false;
+    public float timer = 0;
+    public float turnoffDelay = 1;
 
     public Button(float x, float y, int puzzleFlag) {
         super(x, y);
@@ -24,8 +26,13 @@ public class Button extends Entity {
     public void performLogic(float deltaTime) {
         if (pressed) {
             setTexture(pressedTexture);
+            timer = 0;
         }
         else {
+            timer += deltaTime;
+            if (timer > turnoffDelay) {
+                pressed = false;
+            }
             setTexture(normalTexture);
         }
         MainGame.puzzleFlags.put(puzzleFlag, pressed);
