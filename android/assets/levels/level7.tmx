@@ -43,12 +43,9 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="17" name="wallinfo" tilewidth="16" tileheight="16">
-  <image source="wallinfo.png" width="269" height="137"/>
- </tileset>
  <layer name="Tile Layer 1" width="80" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt21dLw1AchvF6UfVCil/BvRX3VtxbcW/FvRX31q/uU1AQsaUJCfkfeC9+Nyk5PefpSZObxGOxWLb4koNcJMSXZLs8A/NwVZ76qZ/6OUv91E/93KV+6qd+7lI/9VM/d6mf+qmfu9RP/dTPXeqnfi73K0AhilCMEpSiDOWoQCWqUI0a1KLOwNot9KtHAxrRhGa0oBVtaEcHOtGFbvSg18DaLfTrQz8GMIghDGMEoxjDOCYwiSlMY8bA2i30m8Uc5rGARSxhGStYxRrWsYFNbGHbwNot9NvBLvawjwMc4gjHOMEpznCOC1ziKs2YWSlE3SqMfte4wS3ucI8HPOIJz3jBK97wjg98evweqy1dfH5RP/ULu0+6/z/1y6zd3+Pql3m//46rn792vz/T/ddfP6us9LO4t4LqF/a142I3L/3C3Cd+xkr1fBPFb+D3+g1qzl7GSNfNtX5BdPRyrtVrPKj7h9f1+dl3UbcKs19YLLf76ZdvYB4utkt8t4vHon+PzFXJ99++AFnm0eQ=
+   eJzt27EKgCAUhlEXq0Gi93/aaoi2Bgn0hzN8kwiXg7jdWkpZ1NV6tV3t6uq2axPMkVrjx49fbPz48cuNHz9+ufHjxy83fvz45caPH7/c+PHjlxs/fvxy48ePX278+PHLjR8/frnx48cvN37j/Wp5dyH+OPu6M1veH7/RfscEc6R22z3/jfr2306ycL7V
   </data>
  </layer>
 </map>

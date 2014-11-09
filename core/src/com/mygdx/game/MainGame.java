@@ -38,7 +38,7 @@ public class MainGame extends ApplicationAdapter {
 	public static boolean resultsScreen = false;
 	public static boolean win = false;
 
-	public int levelNum = 1;
+	public int levelNum = 6;
 
 	private Matrix4 normalProjection;
 
